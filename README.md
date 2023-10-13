@@ -27,19 +27,22 @@ Here, you will find the layout of the branches and files inside this repository.
 >The .m files are MATLAB files, where the main is a script, whilst the rest are classes. Each branch has a devlog to note any changes made.
 ```mermaid
 mindmap
-  root((main-you are here))
-    Media
+  root((**main-you are here**))
+    *Media*
       Promotion
       Videos
-    Matlab
+      devlog
+    *Matlab*
       main.m
       Env.m
       UR3.m
       Cust_Rob.m
-    Models & Environment
+      devlog
+    *Models & Environment*
       Environment
       Models
         *Series of Models used for the environment*
+      devlog
 
 ```
 
