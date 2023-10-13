@@ -21,7 +21,7 @@ This git Repository provides all the files used for the Assessment 2 task- pick 
 This project identifies the hazards that may occur in the work environment during operation and the appropriate actions of control through the following documentation.
 
 **Risk Assessment** 
-
+<a href="" target="_blank">PDF.</a>
 
 **SWMS**
 
