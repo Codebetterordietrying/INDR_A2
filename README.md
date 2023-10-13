@@ -13,7 +13,7 @@ This git Repository provides all the files used for the Assessment 2 task- pick 
 
 ### Authors & Contributors
 + `🏋️ Rohit Bhat (TAHBTIHOR)   14160232`                  `📧rohit.p.bhat@student.uts.edu.aul`
-+ ` 🏯 Michele Liang ( ) 13980230 `                       `📧michele.liang@student.uts.edu.au`
++ ` 🏯 Michele Liang (micheleliang) 13980230 `                       `📧michele.liang@student.uts.edu.au`
 + `🎱: Yves Gayagay (Codebetterordietrying) 14278055 `    `📧yves.b.gayagay@student.uts.edu.au` 
 
 
