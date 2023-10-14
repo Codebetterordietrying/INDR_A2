@@ -14,7 +14,7 @@ This git Repository provides all the files used for the Assessment 2 task- pick 
 ### Authors & Contributors
 + `🏋️ Rohit Bhat (TAHBTIHOR)   14160232`                  `📧rohit.p.bhat@student.uts.edu.aul`
 + ` 🏯 Michele Liang (micheleliang) 13980230 `                       `📧michele.liang@student.uts.edu.au`
-+ `🎱: Yves Gayagay (Codebetterordietrying) 14278055 `    `📧yves.b.gayagay@student.uts.edu.au` 
++ `🎱 Yves Gayagay (Codebetterordietrying) 14278055 `    `📧yves.b.gayagay@student.uts.edu.au` 
 
 
 ### Safety Documentation
@@ -35,17 +35,22 @@ mindmap
     *Matlab*
       main.m
       Env.m
-      UR3.m
-      Cust_Rob.m
+      UR5.m
+      <Custom Robot>.m
       devlog
     *Models & Environment*
       Environment
+        kitchen.ply
       Models
         *Series of Models used for the environment*
       devlog
+    *GUI*
+      devlog
+      Matlab
+        GUI.m
 
 ```
 
 ### Acknowledgment
-The project is run by UTS Modified robotics toolbox (originally by Peter Corke), and the guidance from Dr Gavin and his tutoring team helped throughout the stage of this project.
+The project is run by the UTS Modified Robotics toolbox (originally by Peter Corke), and guidance from Dr Gavin and his tutoring team helped throughout the stage of this project.
 
