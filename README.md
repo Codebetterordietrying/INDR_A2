@@ -8,7 +8,7 @@ This git Repository provides all the files used for the Assessment 2 task- pick 
 | Name  | ChefMate |
 | ------------- | ------------- |
 | Description  | A kitchenhand assistant cobot system designed for restaurants or domestic  |
-| Robot Models  | UR3 & .....  |
+| Robot Models  | UR5 Linear & .....  |
 | Environment  | A kitchen of a fast food restaurant  |
 
 ### Authors & Contributors
