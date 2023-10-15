@@ -32,11 +32,11 @@ mindmap
       Promotion
       Videos
       devlog
-    *Matlab*
+    *Mlb*
       main.m
       Env.m
       UR5.m
-      <Custom Robot>.m
+      Newrobot.m
       devlog
     *Models & Environment*
       Environment
