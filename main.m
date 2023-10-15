@@ -6,5 +6,8 @@
 %% Load the toolbox (If installed in different directory, load it outside of this script)
 run("C:\Windows\System32\rvctools\startup_rvc.m");
 
-%% Load the Environment 
-env=env();
+%% Load the Linear UR5 model, Our Robot model, Environment and Models
+
+%Origin pose
+og=eye(4);
+UR5=LinearUR5(og);

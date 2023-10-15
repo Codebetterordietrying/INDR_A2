@@ -7,22 +7,19 @@
 classdef Env
   
     
-    properties
-        Property1
+    properties 
     end
     
+
+
     methods
-        function obj = Env(inputArg1,inputArg2)
-            %ENV Construct an instance of this class
-            %   Detailed explanation goes here
-            obj.Property1 = inputArg1 + inputArg2;
+        function self = Env()
+            
+            
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
-        end
+
+        
     end
 end
 
