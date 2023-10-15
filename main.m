@@ -3,7 +3,8 @@
 % Author: Yves Gayagay, Michele Liang, Rohit Bhat
 % Rev: 1.0
 
+%% Load the toolbox (If installed in different directory, load it outside of this script)
+run("C:\Windows\System32\rvctools\startup_rvc.m");
 
 %% Load the Environment 
 env=env();
-%adding onto other things can make things happen
