@@ -38,7 +38,7 @@ mindmap
       UR5.m
       Newrobot.m
       devlog
-    *Models & Environment*
+    *Mdl & Env*
       Environment
         kitchen.ply
       Models
