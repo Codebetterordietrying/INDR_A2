@@ -9,7 +9,7 @@ classdef OurLinearUR5 < RobotBaseClass
     %% LinearUR5 UR5 on a non-standard linear rail created by a student
 
     properties(Access = public)              
-        plyFileNameStem = 'LinearUR5';
+        plyFileNameStem = 'Environment\Mdl\LinearUR5\LinearUR5';
     end
     
     methods
@@ -36,7 +36,7 @@ classdef OurLinearUR5 < RobotBaseClass
             link(7) = Link([0      0       0       0       0]);
             
             % Incorporate joint limits
-            link(1).qlim = [0.01 0.8];
+            link(1).qlim = [-0.8 -0.01];
             link(2).qlim = [-360 360]*pi/180;
             link(3).qlim = [-90 90]*pi/180;
             link(4).qlim = [-170 170]*pi/180;
