@@ -29,7 +29,7 @@ axis equal
 qb1=[-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955         0]; % Pose of the waypoint
 qb2=[-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]; % Pose of hovering Reg Burger
 
-
+% stuff like thnis
 qmatrix1=jtraj(q1,qb1,50);
 qmatrix2=jtraj(qb1,qb2,50);
 
@@ -62,4 +62,5 @@ end
 
 
 % WAYPOINTS
-% Fstat Wayp  = [-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955         0]
+% Fstat Wayp  = [-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955
+% 0]
