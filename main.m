@@ -14,7 +14,7 @@ run("C:\Windows\System32\rvctools\startup_rvc.m");
 
 %Origin pose and joint angles
 
-workspace=[-2 2 -2 2 -0.01 3];
+workspace=[-2 2 -2 3 -0.5 3];
 name='linearur5';
 op='no';
 
@@ -23,5 +23,43 @@ q1=[-0.01 0 0 0 0 0 0];
 UR5.model.plot3d(q1,'nowrist','noarrow','notiles','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 axis equal
 
+%% Move the Robot through teach() and getpos() REV 1.0      (Subjected to change)
 
 
+qb1=[-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955         0]; % Pose of the waypoint
+qb2=[-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]; % Pose of hovering Reg Burger
+
+
+qmatrix1=jtraj(q1,qb1,50);
+qmatrix2=jtraj(qb1,qb2,50);
+
+while 1
+for i=1:50
+    
+   UR5.model.animate(qmatrix1(i,:));
+   drawnow();
+   axis equal
+
+end
+
+for i=1:50
+    
+   UR5.model.animate(qmatrix2(i,:));
+   drawnow();
+   axis equal
+
+end
+end
+
+% Notepad: 
+
+% FOOD STATION
+% Reg Burgers = [-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]
+% Lrg Burgers = [-0.4050    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]
+% Reg Chips   = [-0.2075    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]
+% Lrg Chips   = [-0.0265    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]
+
+
+
+% WAYPOINTS
+% Fstat Wayp  = [-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955         0]
