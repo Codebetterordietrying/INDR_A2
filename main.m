@@ -8,19 +8,43 @@ run("C:\Windows\System32\rvctools\startup_rvc.m");
 
 %% Load the Linear UR5 model, Our Robot model, Environment and Models
 
-   h = PlaceObject("Environment\Env\table_test_v2.ply",[-0.25,-0.015,0]);
-            verts = [get(h,'Vertices'), ones(size(get(h,'Vertices'),1),1)] * troty(pi/2)*trotx(-pi/2);
-            set(h,'Vertices',verts(:,1:3))
-
-%Origin pose and joint angles
-
 workspace=[-2 2 -2 3 -0.5 3];
 name='linearur5';
-op='no';
 
 UR5=OurLinearUR5;
 q1=[-0.01 0 0 0 0 0 0];
 UR5.model.plot3d(q1,'nowrist','noarrow','notiles','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
+
+hold on
+   
+h = PlaceObject("Environment\Env\table_test_v2.ply",[-0.25,-0.015,0]);
+            verts = [get(h,'Vertices'), ones(size(get(h,'Vertices'),1),1)] * troty(pi/2)*trotx(-pi/2);
+            set(h,'Vertices',verts(:,1:3))
+   
+
+   %Spawn a Large burger on its station
+
+   h1 = PlaceObject("Environment\Mdl\Restaurant\hamburgerLRG.ply",[-0.3,0.025,-0.05]);
+            verts = [get(h1,'Vertices'), ones(size(get(h1,'Vertices'),1),1)]*trotz(pi/2);
+            set(h1,'Vertices',verts(:,1:3))
+
+
+    %spawn a small burger on its station
+
+     h2 = PlaceObject("Environment\Mdl\Restaurant\hamburger.ply",[-0.3,0.24,-0.05]);
+            verts = [get(h2,'Vertices'), ones(size(get(h2,'Vertices'),1),1)]*trotz(pi/2);
+            set(h2,'Vertices',verts(:,1:3))
+        
+     h3 = PlaceObject("Environment\Mdl\Restaurant\fries.ply",[-0.15,0.01,-0.05]);
+            verts = [get(h3,'Vertices'), ones(size(get(h3,'Vertices'),1),1)]*trotz(pi/2);
+            set(h3,'Vertices',verts(:,1:3))
+
+     
+
+
+%Origin pose and joint angles
+
+
 axis equal
 
 %% Move the Robot through teach() and getpos() REV 1.0      (Subjected to change)
