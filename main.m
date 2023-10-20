@@ -14,6 +14,7 @@ UR5=OurLinearUR5;
 q1=[-0.01 0 0 0 0 0 0];
 workspace=[-2 2 -2 3 -0.5 3];
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
+UR5.model.delay=0;
 
 hold on
 % Initialize Main Environmment - Kitchen and Restaurant
@@ -23,11 +24,11 @@ hold on
    
 % Initialize Models for Restaurant 
 
-  lrgburg= Env("Environment\Mdl\Restaurant\hamburgerLRG.ply","large_burger",[-0.2,1.4,-0.1],1);
-  [lb_h,lb_v] =lrgburg.plot(transl(-0.2,1.4,-0.1));
+  lrgburg= Env("Environment\Mdl\Restaurant\hamburgerLRG.ply","large_burger",[0 0 0],1);
+  [lb_h,lb_v] =lrgburg.plot(transl(-0.7,0.75,0.2));
 
   burg= Env("Environment\Mdl\Restaurant\hamburger.ply","Burger",[0 0 0],1);
-  burg.plot(transl(0.05,1.4,-0.1));
+  burg.plot(transl(-0.45,0.75,0.2));
 
   fries= Env("Environment\Mdl\Restaurant\fries.ply","fries",[0 0 0],1);
   fries.plot(transl(0.3,0.95,-0.1));
@@ -56,8 +57,9 @@ for i=1:50
    UR5.model.animate(qmatrix1(i,:));
    drawnow();
    axis equal
-
 end
+
+
 
 for i=1:50
     
@@ -68,25 +70,26 @@ for i=1:50
 end
 
 
+
+
 for i=1:50
     
   UR5.model.animate(qmatrix3(i,:));
-  tr=UR5.model.fkine(qmatrix3(i,:));
-
-  ttr=[tr.n tr.o tr.a tr.t ; 0 0 0 1];
-
- lrgburg.update(lb_h,lb_v,ttr);
-
+  tr=UR5.model.fkine(qmatrix3(i,:)).T;
+  lrgburg.update(lb_h,lb_v,tr);
    pause(0.01);
-   axis equal
+     axis equal
 
 end
+
 
 for i=1:50
     
    UR5.model.animate(dropmatrix(i,:));
-   drawnow();
-   axis equal
+   tr=UR5.model.fkine(dropmatrix(i,:)).T;
+   lrgburg.update(lb_h,lb_v,tr);
+    pause(0.01);
+    axis equal
 
 end
 
@@ -162,7 +165,6 @@ for i=1:50
     set(h1,'Vertices',transformedVertices(:,1:3));
 
    drawnow();
-
 
 
 end

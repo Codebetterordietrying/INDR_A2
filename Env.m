@@ -68,7 +68,7 @@ classdef Env < handle
 
           
                     
-           handle = PlaceObject(self.path);
+           handle = PlaceObject(self.path,self.init);
            vertices = get(handle,'Vertices');
           
           if nargin==2 
