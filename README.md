@@ -12,7 +12,7 @@ This git Repository provides all the files used for the Assessment 2 task- pick 
 | Environment  | A kitchen of a fast food restaurant  |
 
 ### Authors & Contributors
-+ `🏋️ Rohit Bhat (TAHBTIHOR)   14160232`                  `📧rohit.p.bhat@student.uts.edu.aul`
++ `🏋️ Rohit Bhat (TAHBTIHOR)   14160232`                  `📧rohit.p.bhat@student.uts.edu.au`
 + ` 🏯 Michele Liang (micheleliang) 13980230 `                       `📧michele.liang@student.uts.edu.au`
 + `🎱 Yves Gayagay (Codebetterordietrying) 14278055 `    `📧yves.b.gayagay@student.uts.edu.au` 
 
