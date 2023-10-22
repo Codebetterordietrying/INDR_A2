@@ -100,6 +100,11 @@ classdef Env < handle
         error("Model is static, change static status if the model will move");
         end
         
-    end
+        end
+
+
+        function delete(self)
+
+        end
 end
 end
