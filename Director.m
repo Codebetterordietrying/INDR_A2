@@ -1,7 +1,7 @@
 % LAB ASSESSMENT 2: ENV CLASS
 % Instructs the robot and all processes to function for the scirpt.
 % Author: Yves Gayagay, Michele Liang, Rohit Bhat
-% Rev: 1.0
+% Rev: 1.5
 
 %% Director Class
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,9 +30,9 @@
 %                            Input: order number from class
 %                       
 %                       Order 1: 1x lrg Burg, 1x Fries,  1x Soda
-%                       Order 2: 1x Burg    , 2x Fries,  1x Soda
-%                       Order 3: 1x Burg    , 1x Fries , 1x Soda
-%                       Order 4: 2x Burg    , 2x Fries , 2x Soda
+%                       Order 2: 1x Burg    , 1x Fries,  1x Soda
+%                       Order 3:            , 1x Fries , 1x Soda
+%                       Order 4: 1x Burg    ,          , 1x Soda
 %                       Order 5: 1x Lrg Burg   
 %                       Order 6:            , 3x Fries
 %
@@ -56,7 +56,12 @@ classdef Director
         Model
         Order
         Variable
+
         Stat
+        Gend
+        tray
+
+
     end
     
     methods
@@ -69,7 +74,7 @@ classdef Director
             elseif nargin==0 
          
     Namearr=["Keila" "Jase" "Nelson" " Madeline" "Dayanara" "Colt" "Joseph";
-               "Alea"  " Chelsea" "Sarah" "Rocky" "Bryon" "Ezra" "Coy";
+               "Alea"  " Chelsea" "Sarah" "Rocky" "Bryon" "Ezra" "Nacho";
                "Gavin" "Yves" "Michele" "Rohit" "Anne" "Kyler" "Stuart";
                 "Wendy" "Samira" "Alonso" "Layla" "Christian" "Zaira" "Ty"];
     
@@ -79,30 +84,24 @@ classdef Director
 
     self.Stat=0;  
 
-            if self.Stat==0                                   % If Customer is going to Order
+                                      % If Customer is going to Order
 
-                modarr=["Environment\Mdl\People\Male_Standing_";
-                        "Environment\Mdl\People\Female_Standing_"];
+     modarr=["Environment\Mdl\People\Male_Standing_";
+            "Environment\Mdl\People\Female_Standing_"];
             
 
-            elseif self.Stat==1
-
-
-                modarr=["Environment\Mdl\People\Male_Hips_";
-                      "Environment\Mdl\People\Female_Hips_"];
-
-
-            elseif self.Stat==2
-
-                modarr=["Environment\Mdl\People\Male_Sit_";
-                       "Environment\Mdl\People\Female_Sit_"];
-
-
-            end
+            
+           
 
    modr=randi([1 2],1,1);                             % Random Model Gen
    self.Model=modarr(modr,1); 
 
+   if self.Model== modarr(1,1)
+   self.Gend=1;                                       % Assign male gender 
+
+   elseif self.Model== modarr(2,1)                    % Assign Female Gender
+   self.Gend=2; 
+   end
 
  
 
@@ -110,7 +109,8 @@ classdef Director
         
    self.Variable=randi([0 2],1,1);                    %  Random Variable 
 
-                                          % Random Status
+   
+       % Random Status
    
             else
 
@@ -120,15 +120,23 @@ classdef Director
    self.Stat=0;
 
             end
-      end
+ end
        
         
-      function instruct=Get(self)
+
+
+
+
+
+
+
+
+      function instruct=Get(self,ttray)
 % FOODSTATION        
        Reg_Burger = [-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
        Lrg_Burger = [-0.4050    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
        Reg_Fries   = [-0.2075    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
-       Lrg_Fries   = [-0.0265    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
+      
 
 
 % ORGIN
@@ -141,23 +149,89 @@ classdef Director
        Tray_1        = [-0.0100   -3.6880    1.1610   -0.1290    0.2732    1.6391         0];    
 
 
+        if ttray==1
         switch self.Order               
             case 1
-                instruct={ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp;Tray_1 };
+                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_1 ];
                 
             case 2
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_1; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1  ];
 
             case 3
-
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1  ];
             case 4
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_1];
 
             case 5
+                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_1];
 
             case 6
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1];
+         end
+       
+        
 
-        end
-        end
-end
+          elseif ttray==2
+          switch self.Order               
+            case 1
+                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_2 ];
+                
+            case 2
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_2; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2  ];
+
+            case 3
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2  ];
+
+            case 4
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_2];
+
+            case 5
+                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_2];
+
+            case 6
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2];
+          end
+          
+
+
+
+     elseif ttray==3
+          switch self.Order               
+            case 1
+                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_3 ];
+                
+            case 2
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_3; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3  ];
+
+            case 3
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3 ];
+            case 4
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_3];
+
+            case 5
+                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_3];
+
+            case 6
+                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3];
+          end
+       end
+
+      end
+
+
+      
+      function stat=update(self)
+            if self.Stat==0
+                stat=0;     
+            elseif self.Stat==1
+                stat=1;                        
+            elseif self.Stat==2
+                stat=2;
+  
+            end
+            end
+
 end
 
+end
 
