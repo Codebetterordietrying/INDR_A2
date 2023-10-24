@@ -131,65 +131,82 @@ classdef Director
 
 
 
-      function instruct=Get(self,ttray)
-% FOODSTATION        
-       Reg_Burger = [-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
-       Lrg_Burger = [-0.4050    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
-       Reg_Fries   = [-0.2075    3.0543    0.6912   -1.0978   -0.2409    1.5708         0];
-      
-
-
+ function [instruct,ref]=Get(self,ttray)
 % ORGIN
-       ORIGIN         =[-0.01        0        0         0         0         0              0];
+       ORIGIN         = [-0.4        0        0         0         0         0             0];
 
-% WAYPOINTS
-       Fstat_Wayp    =[-0.3329    3.0917    0.9225    0.3532    0.4488    1.6955          0];
+% FOODSTATION        
+       Reg_Burger    = [-0.6683    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]; % Model Reference: 1
+       Lrg_Burger    = [-0.4050    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]; % Model Reference: 2
+       Reg_Fries     = [-0.2075    3.0543    0.6912   -1.0978   -0.2409    1.5708         0]; % Model Reference: 3
+       Soda          = [-0.1746    0.2618    0.7854   -0.9890   -0.2618    1.5708         0]; % Model Reference: 4
 
 % Tray Dropoffs
-       Tray_1        = [-0.0100   -3.6880    1.1610   -0.1290    0.2732    1.6391         0];    
+       Tray_1        = [-0.0100    2.6180    0.9163   -0.7418   -0.2618    1.5708         0];  
+       Tray_2        = [-0.0100    1.5708   -0.3927   -2.4726   -0.5236    1.5708         0];
+       Tray_3        = [-0.0100    0.5236    0.0654   -1.9780   -0.5236    1.5708         0];
+
+
 
 
         if ttray==1
         switch self.Order               
             case 1
-                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_1 ];
-                
+                instruct=[ORIGIN ; Lrg_Burger; Tray_1; Reg_Fries ; Tray_1; Soda; Tray_1 ];
+                ref =[0 2 0 3 0 4 0];
+
             case 2
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_1; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1  ];
-
+                instruct=[ORIGIN; Reg_Burger; Tray_1; Reg_Fries; Tray_1; Soda; Tray_1  ];
+                ref =[0 1 0 3 0 4 0];
+                    
             case 3
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1  ];
-            case 4
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_1];
+                instruct=[ORIGIN; Reg_Fries; Tray_1; Soda; Tray_1; zeros(1,7); zeros(1,7) ];
+                ref =[0 3 0 3 0 0 0];
 
+            case 4
+                instruct=[ORIGIN; Reg_Burger; Tray_1; Soda; Tray_1; zeros(1,7); zeros(1,7)];
+                ref =[0 2 0 4 0 0 0];
+                
             case 5
-                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_1];
+                instruct=[ORIGIN; Lrg_Burger; Tray_1; zeros(1,7); zeros(1,7); zeros(1,7); zeros(1,7) ];
+                ref =[0 1 0 0 0 0 0];
+
 
             case 6
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_1];
+                instruct=[ORIGIN; Reg_Fries; Tray_1; zeros(1,7); zeros(1,7); zeros(1,7); zeros(1,7)] ;
+                ref =[0 3 0 0 0 0 0];
+
          end
        
         
 
           elseif ttray==2
           switch self.Order               
-            case 1
-                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_2 ];
-                
-            case 2
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_2; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2  ];
+               case 1
+                instruct=[ORIGIN ; Lrg_Burger; Tray_2; Reg_Fries ; Tray_2; Soda; Tray_2 ];
+                ref =[0 2 0 3 0 4 0];
 
+            case 2
+                instruct=[ORIGIN; Reg_Burger; Tray_2; Reg_Fries; Tray_2; Soda; Tray_2  ];
+                ref =[0 1 0 3 0 4 0];
+                    
             case 3
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2  ];
+                instruct=[ORIGIN; Reg_Fries; Tray_2; Soda; Tray_2   ];
+                ref =[0 3 0 3 0 4 0];
 
             case 4
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_2];
-
+                instruct=[ORIGIN; Reg_Burger; Tray_2; Soda; Tray_2];
+                ref =[0 2 0 4 0 0 0];
+                
             case 5
-                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_2];
+                instruct=[ORIGIN; Lrg_Burger; Tray_2 ];
+                ref =[0 1 0 0 0 0 0];
+
 
             case 6
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_2];
+                instruct=[ORIGIN; Reg_Fries; Tray_2];
+                ref =[0 3 0 0 0 0 0];
+
           end
           
 
@@ -198,21 +215,30 @@ classdef Director
      elseif ttray==3
           switch self.Order               
             case 1
-                instruct=[ORIGIN ;Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_3 ];
-                
+                instruct=[ORIGIN ; Lrg_Burger; Tray_3; Reg_Fries ; Tray_3; Soda; Tray_3 ];
+                ref =[0 2 0 3 0 4 0];
+
             case 2
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_3; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3  ];
-
+                instruct=[ORIGIN; Reg_Burger; Tray_3; Reg_Fries; Tray_3; Soda; Tray_3  ];
+                ref =[0 1 0 3 0 4 0];
+                    
             case 3
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3 ];
-            case 4
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Burger; Fstat_Wayp; Tray_3];
+                instruct=[ORIGIN; Reg_Fries; Tray_3; Soda; Tray_3   ];
+                ref =[0 3 0 3 0 4 0];
 
+            case 4
+                instruct=[ORIGIN; Reg_Burger; Tray_3; Soda; Tray_3];
+                ref =[0 2 0 4 0 0 0];
+                
             case 5
-                instruct=[ORIGIN; Fstat_Wayp; Lrg_Burger; Fstat_Wayp; Tray_3];
+                instruct=[ORIGIN; Lrg_Burger; Tray_3 ];
+                ref =[0 1 0 0 0 0 0];
+
 
             case 6
-                instruct=[ORIGIN; Fstat_Wayp; Reg_Fries; Fstat_Wayp; Tray_3];
+                instruct=[ORIGIN; Reg_Fries; Tray_3];
+                ref =[0 3 0 0 0 0 0];
+
           end
        end
 

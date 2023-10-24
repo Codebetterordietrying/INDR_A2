@@ -33,6 +33,9 @@ classdef Env < handle
             
         static     
         
+        handle
+
+        vertices
         
     end
     
@@ -62,24 +65,24 @@ classdef Env < handle
 
 
 
-        function [handle,vertices] = plot(self,tr) %Function to plot the initialized models onto the graph 
+        function self = plot(self,tr) %Function to plot the initialized models onto the graph 
            % IN YZX FORMAT   [   X=Y, Y=Z , Z=X ]
             % Input: 4x4 Homogenous Matrix
 
           
                     
-           handle = PlaceObject(self.path,self.init);
-           vertices = get(handle,'Vertices');
+           self.handle = PlaceObject(self.path,self.init);
+           self.vertices = get(self.handle,'Vertices');
           
           if nargin==2 
 
 
-           transformedVertices = [vertices,ones(size(vertices,1),1)] * tr';
-           set(handle,'Vertices',transformedVertices(:,1:3));
+           transformedVertices = [self.vertices,ones(size(self.vertices,1),1)] * tr';
+           set(self.handle,'Vertices',transformedVertices(:,1:3));
           
           elseif nargin==1
-           transformedVertices = [vertices,ones(size(vertices,1),1)] * eye(4);
-           set(handle,'Vertices',transformedVertices(:,1:3));   
+           transformedVertices = [self.vertices,ones(size(self.vertices,1),1)] * eye(4);
+           set(self.handle,'Vertices',transformedVertices(:,1:3));   
           end
 
         end
