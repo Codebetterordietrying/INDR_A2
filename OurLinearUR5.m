@@ -20,7 +20,8 @@ classdef OurLinearUR5 < RobotBaseClass
 				baseTr = eye(4);				
             end
             self.model.base = self.model.base.T * baseTr * trotx(pi/2) * troty(pi/2);
-            
+            self.useTool = true;
+            self.toolFilename = '2F-140 Open Gripper.ply'; % gripper name
             self.PlotAndColourRobot();         
         end
 
@@ -33,7 +34,7 @@ classdef OurLinearUR5 < RobotBaseClass
             link(4) = Link([0      0.1197  0.39243 pi      0]);
             link(5) = Link([0      0.093   0       -pi/2   0]);
             link(6) = Link([0      0.093   0       -pi/2	0]);
-            link(7) = Link([0      0       0       0       0]);
+            link(7) = Link([0      0.08       0       0       0]);
             
             % Incorporate joint limits
             link(1).qlim = [-0.8 -0.01];

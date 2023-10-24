@@ -1,7 +1,7 @@
 
 classdef OurDensoVS068 < RobotBaseClass
     %% DensoVS060
-    % This class is based on the DensoVS060. 
+    % This class is based on the DensoVS068. 
     % URL: https://www.denso-wave.com/en/robot/product/five-six/vp.html
     %
     % WARNING: This model has been created by UTS students in the subject
@@ -19,7 +19,8 @@ classdef OurDensoVS068 < RobotBaseClass
             if nargin == 1			
 				self.model.base = self.model.base.T * baseTr;
             end
-            
+            self.useTool = true;
+            self.toolFilename = '2F-140 Open Gripper.ply'; % gripper name
             self.PlotAndColourRobot();         
         end
 
@@ -31,7 +32,7 @@ classdef OurDensoVS068 < RobotBaseClass
             link(3) = Link('alpha',-pi/2,'a',0, 'd',0,'offset',0,'qlim',[deg2rad(-120), deg2rad(153)]);
             link(4) = Link('alpha',pi/2,'a',0.009, 'd',0.335, 'offset',0,'qlim',[deg2rad(-270), deg2rad(270)]);
             link(5) = Link('alpha',-pi/2,'a',0, 'd',0, 'offset',pi/2,'qlim',[deg2rad(-120), deg2rad(120)]);
-            link(6) = Link('alpha',0,'a',0, 'd',0.08, 'offset',0,'qlim',[deg2rad(-360), deg2rad(360)]);
+            link(6) = Link('alpha',0,'a',0, 'd',0.08, 'offset',pi/2,'qlim',[deg2rad(-360), deg2rad(360)]);
 
             self.model = SerialLink(link,'name',self.name); 
         end    
