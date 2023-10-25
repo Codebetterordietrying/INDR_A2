@@ -14,11 +14,11 @@ UR5 = OurLinearUR5;
 
 % gripperBase = eye(4);
 i = eye(4);
-gripperBaseL = i * (UR5.model.fkine(UR5.model.getpos()).T) * trotz(pi/2);
-gripperBaseR = i * (UR5.model.fkine(UR5.model.getpos()).T) * trotz(-pi/2);
+UR5_GripperBaseL = i * (UR5.model.fkine(UR5.model.getpos()).T) * trotz(pi/2) * transl(0, 0, 0.002);
+UR5_GripperBaseR = i * (UR5.model.fkine(UR5.model.getpos()).T) * trotz(-pi/2) * transl(0, 0, 0.002);
 
-gripperL = Robotiq2F85(gripperBaseL);
-% gripperR = Robotiq2F85(gripperBaseR);
+UR5_gripperL = Robotiq2F85(UR5_GripperBaseL);
+UR5_gripperR = Robotiq2F85(UR5_GripperBaseR);
 
 q1 = [-0.01 0 0 0 0 0 0];
 workspace = [-2 5.25 -2 5 -0.5 3];
