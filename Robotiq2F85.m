@@ -1,3 +1,8 @@
+% LAB ASSESSMENT 2: CHEFMATE - ROBOTIQ2F85
+% Progam that has the code and models for the robotic gripper 
+% Author: Michele Liang
+% Rev: 2.0
+
 classdef Robotiq2F85 < RobotBaseClass
 
     properties(Access = public)              

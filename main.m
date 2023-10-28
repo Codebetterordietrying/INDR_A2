@@ -24,9 +24,8 @@ UR5=OurLinearUR5;
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 
 pause(0.5);
+grip=Robotiq2F85(UR5.model.T);
 
-
-pause(0.5);
 
 hold on
 % Initialize Main Environmment - Kitchen and Restaurant
