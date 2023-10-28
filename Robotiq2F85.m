@@ -6,7 +6,7 @@
 classdef Robotiq2F85 < RobotBaseClass
 
     properties(Access = public)              
-        plyFileNameStem = 'Robotiq2F85';
+        plyFileNameStem = 'Environment\Mdl\Robotiq2F8S\Robotiq2F85';
     end
     
     methods

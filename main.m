@@ -13,7 +13,7 @@ clear
 clc
 
 UR5=OurLinearUR5;
-q1=[-0.01 0 0 0 0 0 0];
+q1=[-0.4 0 0 0 0 0 0];
 workspace=[-2 5.25 -2 5 -0.5 3];
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 UR5.model.delay=0;
@@ -24,7 +24,7 @@ UR5=OurLinearUR5;
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 
 pause(0.5);
-grip=Robotiq2F85(UR5.model.T);
+lingrip=Robotiq2F85(UR5.model.fkine(q1).T);
 
 
 hold on
