@@ -1,4 +1,4 @@
-% LAB ASSESSMENT 2: ENV CLASS
+% LAB ASSESSMENT 2: DIRECTOR CLASS
 % Instructs the robot and all processes to function for the scirpt.
 % Author: Yves Gayagay, Michele Liang, Rohit Bhat
 % Rev: 2.0
