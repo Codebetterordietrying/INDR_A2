@@ -1,7 +1,7 @@
 % LAB ASSESSMENT 2: ENV CLASS
 % Load up the environment ply file and a series of model files
 % Author: Yves Gayagay, Michele Liang, Rohit Bhat
-% Rev: 1.0
+% Rev: 2.0
 
 %% Env Class
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,20 +46,21 @@ classdef Env < handle
               %input: File path in string format, custom name, initial coordinates, bool for static
 
             % Copy the attributes of the model and set them to the class of its own
+            
+            if nargin==4
 
             self.path=path;
 
             self.model=model;
 
-            if nargin==2
-
-            self.init=[0 0 0];
-            self.static=0;
-            else
-           
-            
             self.init=init;
             self.static=static;  % 0= Not moving    1= Will move
+
+            elseif nargin==2
+
+            self.init=[0 0 0];
+            self.static=0;           
+  
             end        
         end
 
@@ -91,7 +92,7 @@ classdef Env < handle
 
 
 
-        function update(self,handles,vertices,tr) %Use this function to update transform of the model (When animating)
+        function update(self,handles,vertices,tr) %Use this function to update transform of the model (When animating or changing stat)
             % Input: modle_handle , modle_vertices matrix, 4x4 Homogenous Matrix
         
         if self.static==1
