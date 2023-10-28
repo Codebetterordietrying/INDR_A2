@@ -33,9 +33,6 @@ classdef Env < handle
             
         static     
         
-        handle
-
-        vertices
         
     end
     
@@ -46,44 +43,43 @@ classdef Env < handle
               %input: File path in string format, custom name, initial coordinates, bool for static
 
             % Copy the attributes of the model and set them to the class of its own
-            
-            if nargin==4
 
             self.path=path;
 
             self.model=model;
 
-            self.init=init;
-            self.static=static;  % 0= Not moving    1= Will move
-
-            elseif nargin==2
+            if nargin==2
 
             self.init=[0 0 0];
-            self.static=0;           
-  
+            self.static=0;
+            else
+           
+            
+            self.init=init;
+            self.static=static;  % 0= Not moving    1= Will move
             end        
         end
 
 
 
-        function self = plot(self,tr) %Function to plot the initialized models onto the graph 
+        function [handle,vertices] = plot(self,tr) %Function to plot the initialized models onto the graph 
            % IN YZX FORMAT   [   X=Y, Y=Z , Z=X ]
             % Input: 4x4 Homogenous Matrix
 
           
                     
-           self.handle = PlaceObject(self.path,self.init);
-           self.vertices = get(self.handle,'Vertices');
+           handle = PlaceObject(self.path,self.init);
+           vertices = get(handle,'Vertices');
           
           if nargin==2 
 
 
-           transformedVertices = [self.vertices,ones(size(self.vertices,1),1)] * tr';
-           set(self.handle,'Vertices',transformedVertices(:,1:3));
+           transformedVertices = [vertices,ones(size(vertices,1),1)] * tr';
+           set(handle,'Vertices',transformedVertices(:,1:3));
           
           elseif nargin==1
-           transformedVertices = [self.vertices,ones(size(self.vertices,1),1)] * eye(4);
-           set(self.handle,'Vertices',transformedVertices(:,1:3));   
+           transformedVertices = [vertices,ones(size(vertices,1),1)] * eye(4);
+           set(handle,'Vertices',transformedVertices(:,1:3));   
           end
 
         end
@@ -92,7 +88,7 @@ classdef Env < handle
 
 
 
-        function update(self,handles,vertices,tr) %Use this function to update transform of the model (When animating or changing stat)
+        function update(self,handles,vertices,tr) %Use this function to update transform of the model (When animating)
             % Input: modle_handle , modle_vertices matrix, 4x4 Homogenous Matrix
         
         if self.static==1
