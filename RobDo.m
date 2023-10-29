@@ -1,4 +1,4 @@
-function  Restobj= RobDo(robobj,custobj,models,instruct,ref,traypos, incident)
+function  Restobj= RobDo(robobj,custobj,gripobj,models,instruct,ref,traypos, incident)
 
 if nargin==6
     incident=0;
@@ -41,8 +41,7 @@ steps=50;       %50 traject steps for smoother animation
 m=size(instruct);
 
 
-trayplace=1;
-k=1; 
+trayplace=1; 
 fidx=1;
 
 for idxx=1:m(1,1)
@@ -207,4 +206,3 @@ end
 
 
 end
-

@@ -132,6 +132,9 @@ classdef Director
 
 
  function [instruct,ref,traypos]=Get(self,ttray)
+
+% PRE INPUTTED JOINT ANGLES FOR THE END EFFECTOR USING IKINE AND TEACH FOR THE LINEAR UR5     
+
 % ORGIN
        ORIGIN         = [-0.4        0        0         0         0         0             0];
 
@@ -149,12 +152,12 @@ classdef Director
 
 
 
-        if ttray==1
+        if ttray==1                                                                         % Models and robot's trajectory changes based on which tray is being packd
         switch self.Order               
             case 1
-                instruct=[ORIGIN ; Lrg_Burger; Tray_1; Reg_Fries ; Tray_1; Soda; Tray_1 ];
-                ref =[0 1 0 3 0 4 0];
-                traypos=[0.25 0.9 0.2 ; 0.25 0.8 0.2 ; 0.25 0.7 0.2];
+                instruct=[ORIGIN ; Lrg_Burger; Tray_1; Reg_Fries ; Tray_1; Soda; Tray_1 ];  % Make a column vector of joint angles, to be incremented through for jtraj
+                ref =[0 1 0 3 0 4 0];                                                       % Using model reference above. Create a row vector of number signals to determine sequence of models to be picked up
+                traypos=[0.25 0.9 0.2 ; 0.25 0.8 0.2 ; 0.25 0.7 0.2];                       % Coordinates for the food models to go to, when placed
 
             case 2
                 instruct=[ORIGIN; Reg_Burger; Tray_1; Reg_Fries; Tray_1; Soda; Tray_1  ];
@@ -264,7 +267,7 @@ classdef Director
 
 
       
-      function stat=update(self)
+      function stat=update(self)                                            % Change the status of models for diaagnostic purposes and updating models, for given state 
             if self.Stat==0
                 stat=0;     
             elseif self.Stat==1

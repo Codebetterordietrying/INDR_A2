@@ -1,19 +1,16 @@
-classdef DensoVS068 < RobotBaseClass
-    %% DensoVS060
-    % This class is based on the DensoVS060. 
-    % URL: https://www.denso-wave.com/en/robot/product/five-six/vp.html
-    %
-    % WARNING: This model has been created by UTS students in the subject
-    % 41013. No guarentee is made about the accuracy or correctness of the
-    % of the DH parameters of the accompanying ply files. Do not assume
-    % that this matches the real robot!
+% LAB ASSESSMENT 2: CHEFMATE -Denso VS068 PROGRAM
+% Main program that runs and coordinates all sub-programs for the task
+% Author: Rohit Bhat
+% Rev: 2.0
 
+
+classdef OurDensoVS068 < RobotBaseClass
     properties(Access = public)  
         plyFileNameStem = 'DensoVS068';
     end
     methods (Access = public)
 %% Constructor 
-        function self = DensoVS068(baseTr)
+        function self = OurDensoVS068(baseTr)
 			self.CreateModel();
             if nargin == 1			
 				self.model.base = self.model.base.T * baseTr;

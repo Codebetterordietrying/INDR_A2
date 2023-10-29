@@ -24,7 +24,12 @@ UR5=OurLinearUR5;
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 
 pause(0.5);
-lingrip=Robotiq2F85(UR5.model.fkine(q1).T);
+grip(1)=Robotiq2F85((UR5.model.fkine(q1).T)*transl(0, 0, 0.02)*trotz(pi/2));
+grip(1).model.plot3d([0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'alpha',0);
+
+grip(2)=Robotiq2F85((UR5.model.fkine(q1).T)*transl(0, 0, 0.02)*trotz(3*pi/2));
+grip(2).model.plot3d([0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'alpha',0);
+
 
 
 hold on
@@ -147,7 +152,7 @@ for i=1:(x)
     end
 
 
-    food_h{i}=RobDo(UR5, Customer(i),Restobj,instructions,mod_reference,traypos,incident); 
+    food_h{i}=RobDo(UR5, Customer(i),grip(1,:),Restobj,instructions,mod_reference,traypos,incident); 
     
 
     j=i;
@@ -238,7 +243,3 @@ end
 
 
         
-
-
-
-
