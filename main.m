@@ -4,14 +4,14 @@
 % Rev: 2.0
 
 %% Load the toolbox (If installed in different directory, load it outside of this script)
-run("C:\Windows\System32\rvctools\startup_rvc.m");
+% run("C:\Windows\System32\rvctools\startup_rvc.m");
 
 
 %% Load the Linear UR5 model, Our Robot model, Environment and Models
 %Initialize Our Main Robot- Linear UR5
 clear
 clc
-
+hold on 
 UR5=OurLinearUR5;
 DEN=OurDensoVS068;
 q1=[-0.4 0 0 0 0 0 0];
@@ -28,7 +28,7 @@ UR5.model.delay=0;
 gripobj = Env('Environment\Mdl\LinearUR5\Robotiq2845Open.ply','Static Gripper open',[0 0 0 ],1);
 gripobj.plot(UR5.model.fkine(q1).T);        % Attach static model onto the end effector 
 
-DEN.model.base=eye(4)*transl(-0.5,-0.9,0.25)*trotz(-pi/2);
+DEN.model.base=eye(4)*transl(-0.5,-0.9,0.25)*trotz(0);
 DEN.model.plot3d([0 0 0 0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 pause(0.1);
 
