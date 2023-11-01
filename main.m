@@ -13,26 +13,33 @@ clear
 clc
 
 UR5=OurLinearUR5;
+DEN=OurDensoVS068;
 q1=[-0.4 0 0 0 0 0 0];
+
 workspace=[-2 5.25 -2 5 -0.5 3];
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 UR5.model.delay=0;
 
+% To prevent lagging with a functioning gripper. Have a static model
+% attached onto the end effector and toggle on and off.
+%  On: When the uses of the gripper is not needed. 
+%  off: When a gripper (Serial-link) needs to be spawned in
+
+gripobj = Env('Environment\Mdl\LinearUR5\Robotiq2845Open.ply','Static Gripper open',[0 0 0 ],1);
+gripobj.plot(UR5.model.fkine(q1).T);        % Attach static model onto the end effector 
+
+DEN.model.base=eye(4)*transl(-0.5,-0.9,0.25)*trotz(-pi/2);
+DEN.model.plot3d([0 0 0 0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 pause(0.1);
 
 UR5=OurLinearUR5;
 UR5.model.plot3d(q1,'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 
 pause(0.5);
-grip(1)=Robotiq2F85((UR5.model.fkine(q1).T)*transl(0, 0, 0.02)*trotz(pi/2));
-grip(1).model.plot3d([0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'alpha',0);
-
-grip(2)=Robotiq2F85((UR5.model.fkine(q1).T)*transl(0, 0, 0.02)*trotz(3*pi/2));
-grip(2).model.plot3d([0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'alpha',0);
-
 
 
 hold on
+
 % Initialize Main Environmment - Kitchen and Restaurant
 Restobj(1)= Env("Environment\Env\Environment_v1.ply","table",[0 0 0],0);
 Restobj(1).plot(trotx(pi/2)*troty(3*pi/2)*transl(-0.25,-0.05,0));
@@ -47,7 +54,7 @@ Restobj(3)= Env("Environment\Mdl\Restaurant\tray.ply","tray2",[0 0 0],1);
 Restobj(3).plot(transl(0.26,0.0,0.2)*trotx(pi/2)*troty(pi/2));
 
 Restobj(4)= Env("Environment\Mdl\Restaurant\tray.ply","tray3",[0 0 0],1);
-Restobj(4).plot(transl(0.26,0.-0.75,0.2)*trotx(pi/2)*troty(pi/2));
+Restobj(4).plot(transl(0.26,0.-0.75,0.2)*trotx(pi/2)*troty(-pi/2));
 
 axis equal
 
@@ -70,7 +77,7 @@ else
         pause(0.1);
     end
 
-    idx=1;
+    idx=1;  
     for i=1:size(Customer,2)
 
         Customer(i).tray=idx;
@@ -145,17 +152,15 @@ for i=1:(x)
     wrath= randi([1 100],1,1);
     if wrath>= 1 && wrath <=incident_factor
         incident= randi([1 5],1,1);
-
+        incident=2;
     else
         incident=0;
 
     end
 
 
-    food_h{i}=RobDo(UR5, Customer(i),grip(1,:),Restobj,instructions,mod_reference,traypos,incident); 
+    food_h{i}=RobDo(UR5, Customer(i),gripobj,Restobj,instructions,mod_reference,traypos,incident); 
     
-
-    j=i;
 
     %% Have 3 customers in order, pickup their order and sit down
     if rem(i,3)==0                                                                              % Once all three orders are made. 3 Customers will take their orders at a time

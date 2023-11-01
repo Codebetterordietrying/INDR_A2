@@ -6,7 +6,7 @@
 
 classdef OurDensoVS068 < RobotBaseClass
     properties(Access = public)  
-        plyFileNameStem = 'DensoVS068';
+        plyFileNameStem = 'Environment\Mdl\DensoVS068\DensoVS068';
     end
     methods (Access = public)
 %% Constructor 
