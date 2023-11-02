@@ -1,17 +1,17 @@
 % LAB ASSESSMENT 2: CHEFMATE -MAIN PROGRAM
 % Main program that runs and coordinates all sub-programs for the task
 % Author: Yves Gayagay, Michele Liang, Rohit Bhat
-% Rev: 2.0
+% Rev: 3.0
 
 %% Load the toolbox (If installed in different directory, load it outside of this script)
-% run("C:\Windows\System32\rvctools\startup_rvc.m");
+run("C:\Windows\System32\rvctools\startup_rvc.m");
 
 
 %% Load the Linear UR5 model, Our Robot model, Environment and Models
 %Initialize Our Main Robot- Linear UR5
 clear
 clc
-hold on 
+
 UR5=OurLinearUR5;
 DEN=OurDensoVS068;
 q1=[-0.4 0 0 0 0 0 0];
@@ -25,10 +25,10 @@ UR5.model.delay=0;
 %  On: When the uses of the gripper is not needed. 
 %  off: When a gripper (Serial-link) needs to be spawned in
 
-gripobj = Env('Environment\Mdl\LinearUR5\Robotiq2845Open.ply','Static Gripper open',[0 0 0 ],1);
-gripobj.plot(UR5.model.fkine(q1).T);        % Attach static model onto the end effector 
+%gripobj = Env('Environment\Mdl\LinearUR5\Robotiq2845Open.ply','Static Gripper open',[0 0 0 ],1);
+%gripobj.plot(UR5.model.fkine(q1).T);        % Attach static model onto the end effector 
 
-DEN.model.base=eye(4)*transl(-0.5,-0.9,0.25)*trotz(0);
+DEN.model.base=eye(4)*transl(-0.5,-0.9,0.25)*trotz(-pi/2);
 DEN.model.plot3d([0 0 0 0 0 0],'notiles','nowrist','noarrow','workspace',workspace,'scale',0.25,'view','x','fps',60,'alpha',0);
 pause(0.1);
 
@@ -147,7 +147,7 @@ for i=1:(x)
 
     [instructions,mod_reference,traypos]= Customer(i).Get(Customer(i).tray);
 
-    incident_factor= 15; %     -% Percentage of an incident occuring for every order fulfilled
+    incident_factor= 15; %     -% Percentage of an incident occuring for every order fulfilled3
 
     wrath= randi([1 100],1,1);
     if wrath>= 1 && wrath <=incident_factor
@@ -157,8 +157,9 @@ for i=1:(x)
         incident=0;
 
     end
-
-
+    
+    gripobj=Env('Environment\Mdl\LinearUR5\Robotiq2845Open.ply','Static Open Gripper',[0 0 0],1); %Spawn static open model to finish drag
+    gripobj.plot(UR5.model.fkine(UR5.model.getpos()).T); 
     food_h{i}=RobDo(UR5, Customer(i),gripobj,Restobj,instructions,mod_reference,traypos,incident); 
     
 
@@ -181,6 +182,9 @@ for i=1:(x)
         end
 
         pause(3.0);                                                                                % Delay the whole thing, to make it seem like theyre getting the food
+
+
+
 
         for j=(i-2):i
             delete(food_h{1,j}(1,:).handle)                                                            % Delete Customers that got their food
