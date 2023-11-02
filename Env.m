@@ -23,27 +23,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 classdef Env < handle
-  properties
-        
-         path       
-
-         model       
-
-        init=[]    
-            
+    properties
+        path;       
+        model;       
+        init = [];    
         static     
-        
-        handle
-
-        vertices
-        
+        handle;
+        vertices;
     end
     
-
-
     methods 
         function self = Env(path,model,init,static) % Constructor to initialize models and set in class
-              %input: File path in string format, custom name, initial coordinates, bool for static
+            %input: File path in string format, custom name, initial coordinates, bool for static
 
             % Copy the attributes of the model and set them to the class of its own
             
@@ -54,7 +45,7 @@ classdef Env < handle
             self.model=model;
 
             self.init=init;
-            self.static=static;  % 0= Not moving    1= Will move
+            self.static=static;  % 0 = Not moving  /  1 = Will move
 
             elseif nargin==2
 
