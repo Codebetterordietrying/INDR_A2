@@ -1,6 +1,6 @@
 % LAB ASSESSMENT 2: DIRECTOR CLASS
 % Instructs the robot and all processes to function for the scirpt.
-% Author: Yves Gayagay, Michele Liang, Rohit Bhat
+% Author: Yves Gayagay
 % Rev: 2.0
 
 %% Director Class
@@ -37,14 +37,11 @@
 %                       Order 6:            , 3x Fries
 %
 %
-% Finish()              :   Destructor to delete the order once it is
-%                           finished
-%                           Input: No Input
+% 
 %
 %
-% Event()               :  Random Event occurs in simulation to show of
-%                          safety features
-%                          Input: Randomized number
+% Update()              : Change the models of the customer based on
+%                         updated status 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -157,7 +154,7 @@ classdef Director
             case 1
                 instruct=[ORIGIN ; Lrg_Burger; Tray_1; Reg_Fries ; Tray_1; Soda; Tray_1 ];  % Make a column vector of joint angles, to be incremented through for jtraj
                 ref =[0 1 0 3 0 4 0];                                                       % Using model reference above. Create a row vector of number signals to determine sequence of models to be picked up
-                traypos=[0.25 0.9 0.2 ; 0.25 0.8 0.2 ; 0.25 0.7 0.2];                       % Coordinates for the food models to go to, when placed
+                traypos=[0.25 0.9 0.2 ; 0.25 0.8 0.2 ; 0.25 0.7 0.2];                       % Coordinates for the food models to go to, when placed on trays
 
             case 2
                 instruct=[ORIGIN; Reg_Burger; Tray_1; Reg_Fries; Tray_1; Soda; Tray_1  ];
